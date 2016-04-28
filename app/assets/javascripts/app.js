@@ -157,8 +157,11 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
     $urlRouterProvider.otherwise('/recipes/all');
   }]);
 
-reciffy.run([ '$rootScope', '$location', 'Auth', function($rootScope, $location, Auth){
- $rootScope.$on("$stateChangeError", console.error.bind(console));
+reciffy.run([ '$rootScope', '$location', 'Auth', 'RecipeService', function($rootScope, $location, Auth, RecipeService){
+  $rootScope.$on("$stateChangeError", console.error.bind(console));
+  $rootScope.$on('$routeChangeSuccess', function() {
+    $rootScope.recipes = RecipeService.getRecipes();
+ })
 }]);
 
 reciffy.run(['editableOptions', function(editableOptions) {

@@ -15,6 +15,7 @@ reciffy.controller( 'RecipeIndexCtrl',
   'currentUser',
   'RecentRecipeService',
   '$filter',
+  '$rootScope',
   function(
     Auth,
     $scope,
@@ -30,7 +31,8 @@ reciffy.controller( 'RecipeIndexCtrl',
     UserService,
     currentUser,
     RecentRecipeService,
-    $filter ) {
+    $filter,
+    $rootScope) {
 
   $scope.currentUser = currentUser;
 
@@ -39,7 +41,7 @@ reciffy.controller( 'RecipeIndexCtrl',
   RecommendationService.populateRecommendations();
   UserService.setUsers();
 
-  $scope.recipes = RecipeService.getRecipes();
+  $scope.recipes = $rootScope.recipes || RecipeService.getRecipes();
   $scope.topRecipes =  topRecipeService.getTopRecipes();
   $scope.trendingRecipes =  trendingRecipeService.getTrendingRecipes();
   $scope.recentRecipes = RecentRecipeService.getRecipes();
@@ -47,6 +49,17 @@ reciffy.controller( 'RecipeIndexCtrl',
 
   TagService.callAllTags();
   $scope.tags = TagService.getTags();
+
+  $scope.$on('$routeChangeSuccess', function (event, current, previous) {
+    console.log(previous);
+    console.log(current);
+    console.log('route changed');
+    $scope.recipes = RecipeService.getRecipes();
+    $scope.topRecipes =  topRecipeService.getTopRecipes();
+    $scope.trendingRecipes =  trendingRecipeService.getTrendingRecipes();
+    $scope.recentRecipes = RecentRecipeService.getRecipes();
+    $scope.recdRecipes = RecommendationService.getRecommendations();
+  });
 
   //Display max images in the row for category
   $scope.max = 4;
