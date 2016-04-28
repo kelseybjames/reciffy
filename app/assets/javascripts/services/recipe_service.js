@@ -283,7 +283,7 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
                recipe.recipe_ingredients.unshift(response);
              },
              function(response)  {
-               alert("Could not add recipe ingredient!");
+               alert("Recipe Ingredient not added! Please fill out required Quantity, Units and Ingredient");
              }
           );
     }

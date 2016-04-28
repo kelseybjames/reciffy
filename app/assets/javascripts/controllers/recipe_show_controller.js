@@ -43,6 +43,7 @@ reciffy.controller( 'RecipeShowCtrl',
   $scope.photo = {};
 
   //Recipe Ingredients Added
+  $scope.blank_value = ""
 
   $scope.r_unit = ""
   $scope.r_quantity = ""
@@ -125,28 +126,32 @@ reciffy.controller( 'RecipeShowCtrl',
   $scope.addRecipeIngredient = function() {
     if (!RecipeService.getdisabledStatus()) {
       if ($scope.r_unit.title) {
-          $scope.r_unit = $scope.r_unit.title
+         var r_unit = $scope.r_unit.title
       } else {
-          $scope.r_unit = $scope.r_unit.originalObject
+         var r_unit = $scope.r_unit.originalObject
       }
 
       if ($scope.r_ingredient.title) {
-          $scope.r_ingredient = $scope.r_ingredient.title
+          var r_ingredient = $scope.r_ingredient.title
       } else {
-          $scope.r_ingredient = $scope.r_ingredient.originalObject
+         var r_ingredient = $scope.r_ingredient.originalObject
       }
 
-      var ri = {
-        //unit_id: $scope.r_unit,
-        ingredient_name: $scope.r_ingredient,
-        unit_type: $scope.r_unit,
-        quantity: $scope.r_quantity
-      }
-      RecipeService.addRecipeIngredient(ri);
+      if (!r_ingredient || !r_unit || !$scope.r_quantity) {
+         console.log("Quantity" + $scope.r_quantity)
+         console.log("Unit" + r_unit)
+         console.log("Igredient" + r_ingredient)
+         alert("Ensure recipe ingredient, quantity and units are not empty!")
+      } else {
+        var ri = {
+          //unit_id: $scope.r_unit,
+          ingredient_name: r_ingredient,
+          unit_type: r_unit,
+          quantity: $scope.r_quantity
+        }
+        RecipeService.addRecipeIngredient(ri);
 
-      $scope.r_unit = {};
-      $scope.r_quantity = "";
-      $scope.r_ingredient = "";
+      }  
     }
   };
 

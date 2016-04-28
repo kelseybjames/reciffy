@@ -60,6 +60,7 @@
               <div class="form-group col-sm-2">
                 <span class="title">Unit
                 <angucomplete-alt
+                id="fld1"
                 placeholder="Start typing an unit type..."
                 pause="100"
                 selected-object="r_unit"
@@ -68,6 +69,9 @@
                 title-field="unit_type"
                 minlength="1"
                 override-suggestions="true"
+                initial-value="blank_value"
+                field-required="true"
+                field-required-class="alert-danger"
                 input-class="form-control"/>
 
                 </span>
@@ -77,6 +81,7 @@
                 <span class="title">Ingredient
 
                 <angucomplete-alt
+                id="fld2"
                 placeholder="Start typing an ingredient name..."
                 pause="100"
                 selected-object="r_ingredient"
@@ -85,6 +90,9 @@
                 title-field="name"
                 minlength="1"
                 override-suggestions="true"
+                initial-value="r_ingredient"
+                field-required="true"
+                field-required-class="alert-danger"                
                 input-class="form-control"/>
 
                 </span>
@@ -232,5 +240,6 @@
 <style>
   .pure-pusher {
     background-image: url("images/produce.jpg");
+    background-size: cover;
   }
 </style>
