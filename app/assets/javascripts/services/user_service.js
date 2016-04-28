@@ -11,12 +11,24 @@ reciffy.factory('UserService', ['Restangular', '$state', function(Restangular, $
     })
   };
 
+  var setOneUser = function(userId) {
+    if ( !_users[userId] ) {
+      Restangular
+      .one('users', userId)
+      .get()
+      .then( function(user) {
+        _users[user.id] = user;
+      })
+    }
+  }
+
   var getUsers = function() {
     return _users;
   };
 
   return {
     getUsers: getUsers,
-    setUsers: setUsers
+    setUsers: setUsers,
+    setOneUser: setOneUser
   };
 }])

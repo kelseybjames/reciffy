@@ -36,19 +36,21 @@ reciffy.factory('savedRecipeService', ['Restangular', 'RecipeService', function(
   };
 
   var createSavedRecipe = function(recipeId, userId) {
-    var savedRecipeParams = {
-      recipe_id: recipeId,
-      user_id: userId
-    };
-    Restangular.all('saved_recipes').post(savedRecipeParams)
-    .then(
-      function(response)  {
-        _saved[response.id] = response;
-      },
-      function(response)  {
-        alert("API call for saved recipes didn't work.");
-      }
-    );
+    if (!savedRecipeStatus(recipeId, userId)) {
+      var savedRecipeParams = {
+        recipe_id: recipeId,
+        user_id: userId,
+      };
+      Restangular.all('saved_recipes').post(savedRecipeParams)
+      .then(
+        function(response)  {
+          _saved[response.id] = response;
+        },
+        function(response)  {
+          alert("API call for saved recipes didn't work.");
+        }
+      );
+    }
   };
 
   var deleteSavedRecipe = function(savedRecipeId) {
@@ -64,10 +66,21 @@ reciffy.factory('savedRecipeService', ['Restangular', 'RecipeService', function(
     );
   };
 
+  var savedRecipeStatus = function(recipeId, userId) {
+    for ( s in _saved ) {
+      var savedRecipe = _saved[s];
+      if ( savedRecipe.user_id === userId && savedRecipe.recipe_id === recipeId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return {
     callAllSavedRecipes: callAllSavedRecipes,
     getSavedRecipes: getSavedRecipes,
     createSavedRecipe: createSavedRecipe,
-    deleteSavedRecipe: deleteSavedRecipe
+    deleteSavedRecipe: deleteSavedRecipe,
+    savedRecipeStatus: savedRecipeStatus,
   };
 }]);

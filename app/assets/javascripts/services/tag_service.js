@@ -1,4 +1,4 @@
-reciffy.factory('TagService', ['Restangular', 'RecipeService', function(Restangular, RecipeService) {
+reciffy.factory('TagService', ['Restangular', 'RecipeService', 'UserService', function(Restangular, RecipeService, UserService) {
 
   // An object to hold the tags which have been retrieved from the API
   var _tags = {};
@@ -57,6 +57,9 @@ reciffy.factory('TagService', ['Restangular', 'RecipeService', function(Restangu
       if (type === "Recipe") {
         RecipeService.setOneRecipe(id);
       }
+      if (type == "Profile") {
+        UserService.setOneUser(id);
+      }
     }
   }
 
@@ -94,7 +97,7 @@ reciffy.factory('TagService', ['Restangular', 'RecipeService', function(Restangu
         var idx = _tags[tag_id].taggings.indexOf(response.tagging);
 
         _tags[tag_id].taggings.splice(idx, 1);
-        
+
         if ( _tags[tag_id].taggings.length < 1 ) {
           delete _tags[tag_id];
         }

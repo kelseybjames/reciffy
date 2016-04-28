@@ -26,8 +26,9 @@ reciffy.controller( 'RecipeShowCtrl',
   RecipeService.setUnits();
   RecipeService.setIngredients();
   RecipeService.setMadeRecipes();
-
+  savedRecipeService.callAllSavedRecipes();
   $scope.currentStuff = RecipeService.getCurrentStuff();
+  $scope.currentUser = currentUser;
   RecipeService.setCurrentRecipe($stateParams.id, currentUser).then(
     function(recipe) {
       $scope.recipe = recipe;
@@ -200,6 +201,10 @@ reciffy.controller( 'RecipeShowCtrl',
 
   $scope.createSavedRecipe = function(recipeId, userId) {
     savedRecipeService.createSavedRecipe(recipeId, userId);
+  }
+
+  $scope.savedRecipeStatus = function(recipeId, userId) {
+    savedRecipeService.savedRecipeStatus(recipeId, userId);
   }
 
 }]);
