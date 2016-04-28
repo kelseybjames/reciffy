@@ -11,7 +11,8 @@ class SavedRecipesController < ApplicationController
   end
 
   def create
-    @saved_recipe = current_user.saved_recipes.build(saved_recipe_params)
+    @saved_recipe = current_user.saved_recipes.build(recipe_id: params[:recipe_id])
+    p @saved_recipe
     respond_to do |format|
       if @saved_recipe.save
         format.html { redirect_to request.referrer }

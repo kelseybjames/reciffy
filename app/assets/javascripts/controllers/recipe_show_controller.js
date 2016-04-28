@@ -6,6 +6,7 @@ reciffy.controller( 'RecipeShowCtrl',
     'Restangular',
     'RecipeService',
     'madeRecipeService',
+    'savedRecipeService',
     'currentUser',
     'TagService',
     function(
@@ -15,6 +16,7 @@ reciffy.controller( 'RecipeShowCtrl',
       Restangular,
       RecipeService,
       madeRecipeService,
+      savedRecipeService,
       currentUser,
       TagService) {
 
@@ -197,7 +199,7 @@ reciffy.controller( 'RecipeShowCtrl',
   };
 
   $scope.createSavedRecipe = function(recipeId, userId) {
-
+    savedRecipeService.createSavedRecipe(recipeId, userId);
   }
 
 }]);
