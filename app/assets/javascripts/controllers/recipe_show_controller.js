@@ -203,8 +203,8 @@ reciffy.controller( 'RecipeShowCtrl',
     savedRecipeService.createSavedRecipe(recipeId, userId);
   }
 
-  $scope.savedRecipeStatus = function(recipeId, userId) {
-    savedRecipeService.savedRecipeStatus(recipeId, userId);
+  $scope.showSaveButton = function(recipeId, userId) {
+    return !savedRecipeService.savedRecipeStatus(recipeId, userId);
   }
 
 }]);

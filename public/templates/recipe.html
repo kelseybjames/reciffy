@@ -172,7 +172,7 @@
         <button type="button" name="save"
                 class="btn btn-primary"
                 ng-click="createSavedRecipe(currentStuff.recipe.id, currentUser.id)"
-                ng-if="!savedRecipeStatus(currentStuff.recipe.id, currentUser.id)">
+                ng-if="showSaveButton(currentStuff.recipe.id, currentUser.id)">
           Save This Recipe
         </button>
 

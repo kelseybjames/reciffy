@@ -93,7 +93,7 @@ class PhotosController < ApplicationController
     p params[:photo][:photo]
   end
 
-  def require_photo_author
+  def require_recipe_author
     recipe = Recipe.find_by_id(params[:photo][:recipe_id])
     unless recipe && recipe.user_id == current_user.id
       flash[:danger] = "You're not the recipe's author!!!"

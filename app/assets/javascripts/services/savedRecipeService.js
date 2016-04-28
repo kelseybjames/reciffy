@@ -70,9 +70,11 @@ reciffy.factory('savedRecipeService', ['Restangular', 'RecipeService', function(
     for ( s in _saved ) {
       var savedRecipe = _saved[s];
       if ( savedRecipe.user_id === userId && savedRecipe.recipe_id === recipeId) {
+        console.log("saved")
         return true;
       }
     }
+    console.log("unsaved")
     return false;
   }
 
