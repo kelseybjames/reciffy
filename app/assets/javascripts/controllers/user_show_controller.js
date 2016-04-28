@@ -1,4 +1,4 @@
-reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restangular', 'UserService', 'TagService', 'subscriptionService', 'currentUser', 'Upload', function($scope, $state, $stateParams, Restangular, UserService, TagService, subscriptionService, currentUser, Upload) {
+reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restangular', 'UserService', 'TagService', 'subscriptionService', 'currentUser', 'Upload', 'UserService', function($scope, $state, $stateParams, Restangular, UserService, TagService, subscriptionService, currentUser, Upload, UserService) {
 
   $scope.user_subscribed = false;
 
@@ -31,20 +31,8 @@ reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restang
       tagline: $scope.profile.tagline,
       city: $scope.profile.city,
       state: $scope.profile.state,
-    }).then(function(user) {
-      $scope.user = user;
-      $scope.profile = user.profile;
-      $scope.userRecipes = user.recipes;
-      $scope.userMadeRecipes = user.recipes_made;
-      $scope.userSavedRecipes = user.recipes_saved;
-      $scope.received_subscriptions = user.received_subscription_requests;
-      $scope.checkSubscriberExists(user);
-      $scope.disabledStatus = (currentUser.id != $stateParams.id);
-      $scope.tags = user.profile.tags;
-      $scope.newTag = { name: "" };
-      $scope.avatar = user.photo.url.thumb;
-      $scope.avatarChangeEnabled = (currentUser.id == user.id);
-      console.log($scope.avatarChangeEnabled);
+    }).then(function() {
+      UserService.setOneUser($stateParams.id);
     })
   };
 
@@ -70,9 +58,7 @@ reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restang
   $scope.addTag = function() {
     TagService.addTaggingToTag( $scope.newTag.name, $scope.profile.id, "Profile")
     .then( function(response){
-
       $scope.tags.push(response.tag);
-
     });
 
     $scope.newTag = {name: ""};
@@ -82,10 +68,16 @@ reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restang
   $scope.deleteTag = function(tag_id) {
     TagService.removeTaggingFromTag(tag_id, $scope.profile.id, "Profile")
     .then( function(response) {
-
-      var idx = $scope.tags.indexOf(response.tags);
-
-      $scope.tags.splice(idx, 1);
+      
+      var len = $scope.tags.length;
+      for (var i = 0; i < len ; i++) {
+        if ($scope.tags[i].id == response.id) {
+           $scope.tags.splice(i, 1);
+           i = $scope.tags.length + 1 ;
+        }
+      } 
+      // var idx = $scope.tags.indexOf(response);
+      // $scope.tags.splice(idx, 1);
 
     });
   };

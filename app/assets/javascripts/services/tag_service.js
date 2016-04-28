@@ -93,7 +93,7 @@ reciffy.factory('TagService', ['Restangular', 'RecipeService', 'UserService', fu
       if (_tags[tag_id]) {
 
         var deletedTag = response.tag;
-
+    
         var idx = _tags[tag_id].taggings.indexOf(response.tagging);
 
         _tags[tag_id].taggings.splice(idx, 1);
