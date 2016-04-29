@@ -110,13 +110,6 @@ class RecipesController < ApplicationController
       @recipe.taggings.build( tag_id: tag.id )
     end
 
-    # if @recipe.update(recipe_params)
-    #     flash[:success] = "#{@recipe.name} was updated successfully!"
-    # else
-    #   flash[:alert] = "Your update was NOT successfull!"
-    # end
-    # redirect_to recipe_path(@recipe)
-
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to request.referrer }

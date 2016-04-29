@@ -1,6 +1,5 @@
 <!-- Toggle Hidden Menu Button -->
 <input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left">
-
 <label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left">
 
   <span class="pure-toggle-icon"></span>
@@ -19,6 +18,11 @@
         <div class="menu-item-text">
           <%= "#{current_user.email}" %>
         </div>
+      </a>
+
+      <!-- All Recipes -->
+      <a class="menu-item-container" ui-sref="reciffy.recipes.all">
+        <div class="menu-item-text">All Recipes</div>
       </a>
 
       <!-- My Recipes -->
@@ -41,14 +45,14 @@
         <div class="menu-item-text">Rated Recipes</div>
       </a>
 
+      <!-- Reciffy Cooks -->
+      <a class="menu-item-container" ui-sref="reciffy.users.all">
+        <div class="menu-item-text">Reciffy Cooks</div>
+      </a>
+
       <!-- Subscriptions -->
       <a class="menu-item-container" ui-sref="reciffy.subscriptions">
         <div class="menu-item-text">Subscriptions</div>
-      </a>
-
-
-      <a class="menu-item-container" ui-sref="reciffy.users.all">
-        <div class="menu-item-text">Reciffy Cooks</div>
       </a>
 
       <!-- Sign Out Link -->

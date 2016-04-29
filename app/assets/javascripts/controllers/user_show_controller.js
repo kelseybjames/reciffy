@@ -1,4 +1,25 @@
-reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restangular', 'UserService', 'TagService', 'subscriptionService', 'currentUser', 'Upload', 'UserService', function($scope, $state, $stateParams, Restangular, UserService, TagService, subscriptionService, currentUser, Upload, UserService) {
+reciffy.controller('UserShowCtrl', [
+  '$scope',
+  '$state',
+  '$stateParams',
+  'Restangular',
+  'UserService',
+  'TagService',
+  'subscriptionService',
+  'currentUser',
+  'Upload',
+  'UserService',
+  function(
+    $scope,
+    $state,
+    $stateParams,
+    Restangular,
+    UserService,
+    TagService,
+    subscriptionService,
+    currentUser,
+    Upload,
+    UserService) {
 
   $scope.user_subscribed = false;
 
@@ -68,14 +89,14 @@ reciffy.controller('UserShowCtrl', ['$scope', '$state', '$stateParams', 'Restang
   $scope.deleteTag = function(tag_id) {
     TagService.removeTaggingFromTag(tag_id, $scope.profile.id, "Profile")
     .then( function(response) {
-      
+
       var len = $scope.tags.length;
       for (var i = 0; i < len ; i++) {
         if ($scope.tags[i].id == response.id) {
            $scope.tags.splice(i, 1);
            i = $scope.tags.length + 1 ;
         }
-      } 
+      }
       // var idx = $scope.tags.indexOf(response);
       // $scope.tags.splice(idx, 1);
 

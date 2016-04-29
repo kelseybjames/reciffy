@@ -1,23 +1,23 @@
-reciffy.controller('UserIndexCtrl',
-['$scope',
-'$state',
-'$stateParams',
-'Restangular',
-'UserService',
-'topUserService',
-'topUserCooksService',
-'bestCooksService',
-'horizontalScrollService',
- function(
-$scope,
-$state,
-$stateParams,
-Restangular,
-UserService,
-topUserService,
-topUserCooksService,
-bestCooksService,
-horizontalScrollService) {
+reciffy.controller('UserIndexCtrl', [
+  '$scope',
+  '$state',
+  '$stateParams',
+  'Restangular',
+  'UserService',
+  'topUserService',
+  'topUserCooksService',
+  'bestCooksService',
+  'horizontalScrollService',
+  function(
+    $scope,
+    $state,
+    $stateParams,
+    Restangular,
+    UserService,
+    topUserService,
+    topUserCooksService,
+    bestCooksService,
+    horizontalScrollService) {
 
   topUserService.callTopUsers();
   topUserCooksService.callTopUserCooks();

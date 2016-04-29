@@ -332,7 +332,6 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
                   ingredient_id: ingredients[i].ingredient_id,
                   quantity: ingredients[i].quantity,
         };
-        console.log(ri);
         addRecipeIngredient(ri)
       }
 

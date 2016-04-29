@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       if @comment.save
         flash[:success] = 'Comment created'
         format.html { redirect_to recipe_path(@recipe) }
-        format.json { render json: @comment.to_json }
+        format.json { render json: @comment.to_json(include: :profile) }
       else
         flash[:error] = 'Comment failed to create'
         format.html { redirect_to request_referrer }

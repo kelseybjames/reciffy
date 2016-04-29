@@ -41,33 +41,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  # def show
-  #   @user = User.find_by_id(params[:user_id])
-  #   if @user
-  #     @friendeds = @user.friendeds
-  #     @profile = @user.profile
-  #     @photo = Photo.find_by_id(params[:id])
-  #   else
-  #     flash[:danger] = "User doesn't exist man..."
-  #     if signed_in_user?
-  #       redirect_to user_path(current_user)
-  #     else
-  #       redirect_to signup_path
-  #     end
-  #   end
-  # end
-  #
-  # def destroy
-  #   @photo = Photo.find_by_id(params[:id])
-  #   if @photo.destroy
-  #     flash[:success] = "You've deleted a picture!"
-  #     redirect_to photos_path(id: current_user.id)
-  #   else
-  #     flash[:danger] = "Failed to delete a picture!"
-  #     redirect_to photos_path(id: current_user.id)
-  #   end
-  # end
-
   private
 
   def photo_params

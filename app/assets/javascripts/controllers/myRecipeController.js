@@ -1,5 +1,4 @@
-reciffy.controller('MyRecipeCtrl',
-  [
+reciffy.controller('MyRecipeCtrl', [
     'RecipeService',
     'myRecipeService',
     '$scope',

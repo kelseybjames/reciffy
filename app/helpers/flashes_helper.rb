@@ -1,2 +1,0 @@
-module FlashesHelper
-end
