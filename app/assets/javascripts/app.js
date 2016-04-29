@@ -1,43 +1,46 @@
-var reciffy = angular.module('reciffy', ['ui.router', 'restangular', 'Devise', 'xeditable',
-                                        'ui.bootstrap', 'angular.filter', 'angular-input-stars',
-                                        'ngFileUpload', "angucomplete-alt",
-                                        'infinite-scroll'])
-
+var reciffy = angular.module('reciffy', [
+  'ui.router',
+  'restangular',
+  'Devise',
+  'xeditable',
+  'ui.bootstrap',
+  'angular.filter',
+  'angular-input-stars',
+  'ngFileUpload',
+  'angucomplete-alt',
+  'infinite-scroll'])
 .config([ 'AuthProvider', function(AuthProvider) {
     // Configure Auth service with AuthProvider
-}]).
-controller('myCtrl', ['Auth', function(Auth) {
+}])
+.controller('myCtrl', ['Auth', function(Auth) {
     // Use your configured Auth service.
 }]);
 
-angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
-
+// Underscore
 reciffy.factory('_', ['$window', function($window) {
   return $window._; // assumes underscore has already been loaded on the page
 }]);
 
-// Restangular Config
+// Restangular Configuration
 reciffy.config( ['RestangularProvider', function(RestangularProvider) {
-
   RestangularProvider.setBaseUrl('/api/v1');
   RestangularProvider.setRequestSuffix('.json');
   RestangularProvider.setDefaultHttpFields({
     "content-type": "application/json"
   });
-
 }]);
 
+// UI Router
 reciffy.config(['$urlRouterProvider', '$stateProvider',
   function($urlRouterProvider, $stateProvider){
-
     $stateProvider
-
+    // Top level route
     .state("reciffy", {
       url: "",
       templateUrl: "templates/reciffy.html",
       controller: "ReciffyCtrl",
     })
-    // Home Page / Dashboard / Recipes Index
+    // Recipe umbrella route
     .state("reciffy.recipes", {
       url: "/recipes",
       template: "<div ui-view></div>",
@@ -48,6 +51,7 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
         }]
       },
     })
+    // Shows all recipes, sorted into categories
     .state("reciffy.recipes.all", {
       url: "/all",
       templateUrl: "templates/recipes.html",
@@ -58,6 +62,7 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
         }]
       },
     })
+    // Shows recipes directly owned by current user
     .state("reciffy.recipes.my", {
       url: "/my",
       templateUrl: '/templates/my_recipe_layout.html',
@@ -68,6 +73,7 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
         }]
       },
     })
+    // Shows recipes marked as "made" by current user
     .state("reciffy.recipes.made", {
       url: "/made",
       templateUrl: '/templates/made_recipe_layout.html',
@@ -78,19 +84,19 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
         }]
       },
     })
-    // Saved Recipes Page
+    // All recipes saved by the current user
     .state("reciffy.recipes.saved", {
       url: "/saved",
       controller: "savedRecipeCtrl",
       templateUrl: "templates/saved.html"
     })
-    // Rated Recipes Page
+    // All recipes rated by the current user
     .state("reciffy.recipes.rated", {
       url: "/rated",
       controller: "ratedRecipeCtrl",
       templateUrl: "templates/rated.html"
     })
-    // Recipe Show Page
+    // Shows a single recipe
     .state("reciffy.recipes.show", {
       url: "/:id",
       templateUrl: "templates/recipe.html",
@@ -106,6 +112,7 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
       url: "/tags",
       template: "<div ui-view></div>",
     })
+    // Show recipes and user associated with a tag
     .state("reciffy.tags.show", {
       url: "/:id",
       templateUrl: "templates/tag.html",
@@ -157,13 +164,16 @@ reciffy.config(['$urlRouterProvider', '$stateProvider',
     $urlRouterProvider.otherwise('/recipes/all');
   }]);
 
-reciffy.run([ '$rootScope', '$location', 'Auth', 'RecipeService', function($rootScope, $location, Auth, RecipeService){
-  $rootScope.$on("$stateChangeError", console.error.bind(console));
-  $rootScope.$on('$routeChangeSuccess', function() {
-    $rootScope.recipes = RecipeService.getRecipes();
- })
-}]);
+// Xeditable in-place editing
 
 reciffy.run(['editableOptions', function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+}]);
+
+// Infinite Scroll
+angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
+
+// Show errors in the console
+reciffy.run([ '$rootScope', '$location', 'Auth', function($rootScope, $location, Auth){
+$rootScope.$on("$stateChangeError", console.error.bind(console));
 }]);

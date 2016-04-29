@@ -105,7 +105,7 @@
 <h3>By Tag</h3>
 <div class="row">
   <div class="col-xs-12">
-    <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-container="'#infinite-container'">
+    <div infinite-scroll="loadMore()" infinite-scroll-container="'#infinite-container'">
 
       <div ng-repeat="tag in tags | toArray | limitTo : tagLimit">
         <div ng-if="anyTaggings(tag)">

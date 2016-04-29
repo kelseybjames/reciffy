@@ -6,6 +6,7 @@
     <div class="panel panel-default">
 
       <div class="panel-heading">
+        <!-- Recipe Name -->
         <h4>
         <span editable-text='currentStuff.recipe.name' onaftersave='updateMainRecipe()'
               e-ng-disabled='getDisabledStatus()'>
@@ -13,17 +14,21 @@
         </span>
         </h4>
 
+        <!-- Rating -->
         <input-stars ng-model="currentStuff.rating.rating" max="5" ng-change="submitRating()"></input-stars>
 
+        <!-- Description -->
         <p>
-          <span editable-text='currentStuff.recipe.description' onaftersave='updateMainRecipe()'
+          <span editable-text='currentStuff.recipe.description'
+                onaftersave='updateMainRecipe()'
                 e-ng-disabled='getDisabledStatus()'>
-          {{currentStuff.recipe.description ? currentStuff.recipe.description : "Description"}}
+            {{currentStuff.recipe.description ? currentStuff.recipe.description : "Description"}}
           </span>
         </p>
       </div>
 
       <div class="panel-body">
+        <!-- Cooking/Prep Time -->
         <h6 class="pull-right">
           <em>Cooking Time:
             <span editable-text='currentStuff.recipe.cook_time' onaftersave='updateMainRecipe()'
@@ -38,6 +43,8 @@
             mins
           </em>
         </h6>
+
+        <!-- Add an Ingredient -->
         <h4>Ingredients
             <a>
             <i class="plus glyphicon glyphicon-plus glyphicon-white"
@@ -46,6 +53,7 @@
             </a>
         </h4>
 
+        <!-- Ingredient Form -->
         <div ng-show='getMakeRecipeIngredient()'>
 
           <form editable-form name="RIForm" role="form" maxonaftersave="addRecipeIngredient()">
@@ -108,6 +116,7 @@
           </form>
         </div>
 
+        <!-- Ingredient List -->
         <table class="table table-striped">
           <tbody>
             <tr ng-repeat="ri in currentStuff.recipe.recipe_ingredients">
@@ -124,6 +133,7 @@
           </tbody>
         </table>
 
+        <!-- Instructions for making the recipe -->
         <h4>Instructions</h4>
 
         <p>
@@ -133,17 +143,22 @@
           </span>
         </p>
 
+        <!-- Recipe Photo Gallery -->
         <h4>Photo Gallery</h4>
         <div ng-repeat="photo in currentStuff.recipe.photos">
           <img ng-src="{{photo.url.large}}">
         </div>
 
+        <!-- Photo Upload -->
         <input type="file" id="fileUpload" ng-show="false" upload-recipe-image ng-disabled='getDisabledStatus()' />
         <div class="drop-box" ng-click="openFileWindow()" ng-class=" {hidden: recipeImageLink}">
           Click to upload another recipe image.
         </div>
 
+        <!-- Tags on this Recipe -->
         <h4>Tags</h4>
+
+        <!-- List of tags -->
         <div  class="tag label label-info"
               ng-repeat="tagging in currentStuff.recipe.taggings" >
           <span class="pull-left">
@@ -156,6 +171,8 @@
             </i>
           </a>
         </div>
+
+        <!-- Tag form -->
         <div class="input-group">
           <input type="text" ng-model="newTag.name" class="form-control input-sm" placeholder="Add a Tag...">
           <span class="input-group-btn">
@@ -165,6 +182,7 @@
 
       </div>
 
+      <!-- Action Buttons -->
       <div class="panel-footer">
 
         <button type="button" name="save"
@@ -197,6 +215,7 @@
 
     </div>
 
+    <!-- Comment form -->
     <h4>Leave a Comment</h4>
 
     <form>
@@ -207,6 +226,7 @@
 
     </form>
 
+    <!-- Comment List -->
     <h4>All Comments</h4>
 
     <div class="comment" ng-repeat="comment in currentStuff.recipe.comments | orderBy : '-created_at'">

@@ -4,8 +4,12 @@
     <div class="panel panel-default">
 
       <div class="panel-heading">
+        <!-- User's Name - Editable -->
         <span editable-text='profile.first_name' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.first_name}}</span>
+
         <span editable-text='profile.last_name' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.last_name}}</span>
+
+        <!-- Subscribe Button -->
         <button type="button" name="made" ng-hide="user_subscribed"
                 class="btn btn-xs btn-success pull-right"
                 ng-click="addSubscriber(user)">Subscribe to me!
@@ -13,6 +17,7 @@
       </div>
 
       <div class="panel-body">
+        <!-- View/Change Avatar -->
         <h4>Avatar</h4>
         <img ng-src="{{avatar}}"></img>
         <input type="file" id="fileUpload" ng-show="false" upload-image />
@@ -20,27 +25,47 @@
             Click to choose a new avatar.
         </div>
 
+        <!-- Editable Tagline -->
         <h4>Tagline</h4>
         <p editable-text='profile.tagline' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.tagline}}</p>
 
+        <!-- Editable Bio -->
         <h4>Bio</h4>
         <p editable-textarea='profile.bio' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>
           {{profile.bio}}
         </p>
 
+        <!-- Editable City -->
         <h4>City</h4>
-          <p editable-text='profile.city' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.city}}</p>
+        <p editable-text='profile.city' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.city}}</p>
+
+        <!-- Editable State -->
         <h4>State</h4>
         <p editable-text='profile.state' onaftersave='updateUserProfile()' e-ng-disabled='disabledStatus'>{{profile.state}}</p>
+
+        <!-- Tags on this user -->
         <h4>Tags</h4>
         <div class="tag label label-info" ng-repeat="tag in tags" >
-          <span class="pull-left"><a ui-sref="reciffy.tags.show({id: tag.id})">{{tag.name}}</a> | </span>
-          <a><i class="remove glyphicon glyphicon-remove glyphicon-white pull-right" ng-click="deleteTag(tag.id)"></i></a>
+
+          <span class="pull-left">
+            <a ui-sref="reciffy.tags.show({id: tag.id})">
+              {{tag.name}}
+            </a>&nbsp;|&nbsp;
+          </span>
+
+          <a>
+            <i class="remove glyphicon glyphicon-remove glyphicon-white pull-right" ng-click="deleteTag(tag.id)">
+            </i>
+          </a>
         </div>
+
+        <!-- Tagging form -->
         <div class="input-group">
           <input type="text" ng-model="newTag.name" class="form-control input-sm" placeholder="Add a Tag..." ng-disabled='disabledStatus'>
           <span class="input-group-btn">
-            <button class="btn btn-info btn-sm" type="button" ng-click="addTag()">Tag It</button>
+            <button class="btn btn-info btn-sm" type="button" ng-click="addTag()">
+              Tag It
+            </button>
           </span>
         </div>
       </div>

@@ -51,7 +51,6 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
       _ingredients.length = 0;
       for( var i = 0; i < ingredients.length; i++ ) {
         _ingredients.push(ingredients[i]);
-        // _ingredients[ingredients[i].id] = ingredients[i];
       }
     });
   };
