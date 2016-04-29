@@ -74,7 +74,6 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
     .getList()
     .then( function(photos) {
       _photos = photos;
-      console.log(_photos);
     })
   };
 
@@ -316,7 +315,6 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
     };
 
     ingredients = recipe.recipe_ingredients;
-    console.log(ingredients);
 
     Restangular
     .all('recipes')

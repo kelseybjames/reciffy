@@ -38,7 +38,6 @@ reciffy.controller('UserShowCtrl', [
       $scope.newTag = { name: "" };
       $scope.avatar = user.photo.url.thumb;
       $scope.avatarChangeEnabled = (currentUser.id == user.id);
-      console.log($scope.avatarChangeEnabled);
     })
   };
 
@@ -53,7 +52,7 @@ reciffy.controller('UserShowCtrl', [
       city: $scope.profile.city,
       state: $scope.profile.state,
     }).then(function(newProfile) {
-      
+
     })
   };
 

@@ -103,7 +103,6 @@ reciffy.factory('horizontalScrollService', ['Restangular', function(Restangular)
     var len = $scope.getTaggingsLength(taggings);
     var thisPage = $scope.getThisPage(taggingName);
     var lastRec = (thisPage * max) + max;
-    console.log(lastRec, len);
     return lastRec >= len ? true : false;
   };
   //Taggigs

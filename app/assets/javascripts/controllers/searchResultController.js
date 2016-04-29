@@ -22,7 +22,6 @@ reciffy.controller('searchResultCtrl', [
       TagService.callOneTag($scope.searchTag.id);
       $scope.recipes = RecipeService.getRecipes();
       $scope.users = UserService.getUsers();
-      console.log($scope.users, $scope.recipes);
       $scope.noResultsMsg = undefined;
     } else {
       $scope.noResultsMsg = "Sorry! No recipes or users by that tag!"

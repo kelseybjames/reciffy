@@ -33,7 +33,7 @@ reciffy.controller( 'RecipeShowCtrl', [
       $scope.recipe = recipe;
     },
     function() {
-      console.log("error in setting current recipe");
+      console.error("error in setting current recipe");
     }
   );
 
@@ -144,9 +144,6 @@ reciffy.controller( 'RecipeShowCtrl', [
       }
 
       if (!r_ingredient || !r_unit || !$scope.r_quantity) {
-         console.log("Quantity" + $scope.r_quantity)
-         console.log("Unit" + r_unit)
-         console.log("Igredient" + r_ingredient)
          alert("Ensure recipe ingredient, quantity and units are not empty!")
       } else {
         var ri = {
