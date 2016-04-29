@@ -206,8 +206,15 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
     .one("comments", comment.id)
     .remove()
     .then(function(deletedComment) {
-      var idx = _current.recipe.comments.indexOf(deletedComment);
-      _current.recipe.comments.splice(idx, 1);
+
+      var len = _current.recipe.comments.length;
+      for (var i = 0; i < len ; i++) {
+        if (_current.recipe.comments[i].id == deletedComment.id) {
+            _current.recipe.comments.splice(i, 1);
+            break;
+        }
+      }
+      console.log(_current.recipe.comments);
     });
   };
 

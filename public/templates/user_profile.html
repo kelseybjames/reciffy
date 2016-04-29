@@ -38,7 +38,7 @@
           <a><i class="remove glyphicon glyphicon-remove glyphicon-white pull-right" ng-click="deleteTag(tag.id)"></i></a>
         </div>
         <div class="input-group">
-          <input type="text" ng-model="newTag.name" class="form-control input-sm" placeholder="Add a Tag...">
+          <input type="text" ng-model="newTag.name" class="form-control input-sm" placeholder="Add a Tag..." ng-disabled='disabledStatus'>
           <span class="input-group-btn">
             <button class="btn btn-info btn-sm" type="button" ng-click="addTag()">Tag It</button>
           </span>
