@@ -7,7 +7,7 @@
     <div class="col-xs-6 col-sm-4 col-md-3 made-recipe-holder" ng-if="recipes[myRecipe.id]">
 
       <a ui-sref="reciffy.recipes.show({id: myRecipe.id})">
-        <recipe-directive recipe="recipes[myRecipe.id]"></recipe-directive>
+        <recipe-directive recipe="myRecipe"></recipe-directive>
       </a>
 
     </div>

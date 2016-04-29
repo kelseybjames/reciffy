@@ -3,15 +3,13 @@ reciffy.factory('myRecipeService', ['Restangular','RecipeService', function(Rest
   var _myRecipes = {};
 
   var setRecipes = function() {
-    if ( Object.keys(_myRecipes).length < 1 ) {
-      Restangular
-      .all('recipes')
-      .getList()
-      .then( function(recipes) {
-        populateMy(recipes);
-        populateRecipes(recipes)
-      });
-    }
+    Restangular
+    .all('recipes')
+    .getList()
+    .then( function(recipes) {
+      populateMy(recipes);
+      populateRecipes(recipes)
+    });
   };
 
   var getRecipes = function() {

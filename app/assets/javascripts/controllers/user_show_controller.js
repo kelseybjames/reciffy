@@ -52,8 +52,8 @@ reciffy.controller('UserShowCtrl', [
       tagline: $scope.profile.tagline,
       city: $scope.profile.city,
       state: $scope.profile.state,
-    }).then(function() {
-      UserService.setOneUser($stateParams.id);
+    }).then(function(newProfile) {
+      
     })
   };
 

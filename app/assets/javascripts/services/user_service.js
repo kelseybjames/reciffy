@@ -26,9 +26,14 @@ reciffy.factory('UserService', ['Restangular', '$state', function(Restangular, $
     return _users;
   };
 
+  var getOneUser = function(userId) {
+    return _users[userId];
+  };
+
   return {
     getUsers: getUsers,
     setUsers: setUsers,
-    setOneUser: setOneUser
+    setOneUser: setOneUser,
+    getOneUser: getOneUser
   };
 }])
