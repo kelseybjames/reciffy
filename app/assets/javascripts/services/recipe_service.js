@@ -57,7 +57,8 @@ reciffy.factory('RecipeService', ['Restangular', '$state', '$stateParams', funct
   };
 
   var setUnits = function() {
-    Restangular
+    _units = [];
+    return Restangular
     .all('units')
     .getList()
     .then( function(units) {

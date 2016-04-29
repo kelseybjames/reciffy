@@ -38,15 +38,20 @@ reciffy.controller( 'RecipeShowCtrl', [
   );
 
   $scope.units = RecipeService.getUnits();
+
   $scope.ingredients = RecipeService.getIngredients();
   $scope.photo = {};
 
   //Recipe Ingredients Added
   $scope.blank_value = ""
 
-  $scope.r_unit = ""
-  $scope.r_quantity = ""
-  $scope.r_ingredient = ""
+  $scope.r_quantity = "";
+  $scope.r_unit = {
+    name: ""
+  };
+  $scope.r_ingredient = {
+    name: ""
+  };
 
   TagService.callAllTags();
   $scope.tags = TagService.getTags();
@@ -79,7 +84,6 @@ reciffy.controller( 'RecipeShowCtrl', [
   }
 
   $scope.addTag = function() {
-    // RecipeService.addTag();
     TagService.addTaggingToTag( $scope.newTag.name, $scope.currentStuff.recipe.id, "Recipe")
     .then( function(response){
       $scope.currentStuff.recipe.taggings.push(response.tagging)
@@ -89,11 +93,8 @@ reciffy.controller( 'RecipeShowCtrl', [
 
   // Actually only deletes that particular TAGGING, not the tag itself
   $scope.deleteTag = function(tag_id) {
-    // RecipeService.removeTag(tag_id);
     TagService.removeTaggingFromTag(tag_id, $scope.currentStuff.recipe.id, "Recipe")
     .then( function(response) {
-      //var idx = $scope.currentStuff.recipe.taggings.indexOf(response.taggings)
-      //$scope.currentStuff.recipe.taggings.splice(idx, 1)
       var len = $scope.currentStuff.recipe.taggings.length;
       for (var i = 0; i < len ; i++) {
         if ($scope.currentStuff.recipe.taggings[i].tag_id == response.id) {
@@ -123,37 +124,35 @@ reciffy.controller( 'RecipeShowCtrl', [
     if (!RecipeService.getdisabledStatus()) {
       RecipeService.removeRecipeIngredient(ri);
 
-      $scope.r_unit = "";
+      $scope.r_unit.name = "";
       $scope.r_quantity = "";
-      $scope.r_ingredient = "";
+      $scope.r_ingredient.name = "";
     }
   };
 
   $scope.addRecipeIngredient = function() {
     if (!RecipeService.getdisabledStatus()) {
       if ($scope.r_unit.title) {
-         var r_unit = $scope.r_unit.title
+        var r_unit = $scope.r_unit.title
       } else {
-         var r_unit = $scope.r_unit.originalObject
+        var r_unit = $scope.r_unit.originalObject
       }
 
       if ($scope.r_ingredient.title) {
-          var r_ingredient = $scope.r_ingredient.title
+        var r_ingredient = $scope.r_ingredient.title
       } else {
-         var r_ingredient = $scope.r_ingredient.originalObject
+        var r_ingredient = $scope.r_ingredient.originalObject
       }
 
       if (!r_ingredient || !r_unit || !$scope.r_quantity) {
-         alert("Ensure recipe ingredient, quantity and units are not empty!")
+        alert("Ensure recipe ingredient, quantity and units are not empty!")
       } else {
         var ri = {
-          //unit_id: $scope.r_unit,
           ingredient_name: r_ingredient,
           unit_type: r_unit,
           quantity: $scope.r_quantity
         }
         RecipeService.addRecipeIngredient(ri);
-
       }
     }
   };
@@ -189,21 +188,6 @@ reciffy.controller( 'RecipeShowCtrl', [
         console.error(error);
       });
     };
-  };
-
- // Here is a naive implementation for matching first name, last name, or full name
-  $scope.localUnitSearch = function(str) {
-    var matches = [];
-
-    $scope.units.forEach(function(unit) {
-      if ((unit.unit_type.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0))  {
-        matches.push(unit.unit_type);
-      }
-    });
-    if (matches.length == 0) {
-       matches.push(str);
-    }
-    return matches;
   };
 
   $scope.createSavedRecipe = function(recipeId, userId) {
